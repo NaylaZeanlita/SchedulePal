@@ -22,7 +22,7 @@ body {
   position: absolute;
   width: 65.5vw;
   left: 25%;
-  top: 10rem;
+  top: 9rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -41,8 +41,8 @@ body {
 .header button {
   background-color: var(--primary);
   border: none;
-  font-size: 1rem;
-  padding: 1rem 1.5rem;
+  font-size: 0.9rem;
+  padding: 0.9rem 1.45rem;
   border-radius: 10px;
   color: var(--secondary);
   letter-spacing: -0.005rem;
@@ -53,9 +53,8 @@ body {
   transition: 0.15s;
 }
 nav {
-  font-size: 15px;
   background-color: var(--secondary);
-  width: 250px;
+  width: 220px;
   height: 100vh;
   padding: 1rem;
   display: flex;
@@ -73,10 +72,10 @@ nav {
   align-items: center;
   gap: 10px;
   padding: 10px;
-  font-size: 16px;
+  font-size: 14px;
   border-radius: 10px;
+  letter-spacing: -0.5px;
   color: var(--primary);
-  letter-spacing: -1px;
   transition: 0.15s;
 }
 .nav-links a:hover {
@@ -110,10 +109,10 @@ nav {
   align-items: center;
   gap: 10px;
   padding: 10px;
-  font-size: 16px;
+  font-size: 14px;
   border-radius: 10px;
+  letter-spacing: -0.5px;
   color: var(--negative);
-  letter-spacing: -1px;
   transition: 0.15s;
   svg {
     fill: var(--negative);
