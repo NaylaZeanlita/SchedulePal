@@ -47,7 +47,7 @@ if (!isset($user)) {
                 </svg>
                 <div>
                     <h2>Schedule<br>Diterima</h2>
-                    <p>0</p>
+                    <p><?= jumlahScheduleSetuju($conn) ?></p>
                 </div>
             </div>
             <div class="card">
@@ -58,7 +58,7 @@ if (!isset($user)) {
                 </svg>
                 <div>
                     <h2>Schedule<br>Ditolak</h2>
-                    <p>0</p>
+                    <p><?= jumlahScheduleTolak($conn) ?></p>
                 </div>
             </div>
         </div>
