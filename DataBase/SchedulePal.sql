@@ -37,7 +37,7 @@ CREATE TABLE `fakultas` (
 
 LOCK TABLES `fakultas` WRITE;
 /*!40000 ALTER TABLE `fakultas` DISABLE KEYS */;
-INSERT INTO `fakultas` VALUES (4,'Informatika'),(5,'Fakultas Kedokteran'),(6,'Fakultas Psikologi'),(7,'Fakultas Ilmu Sosial dan Politik'),(8,'Fakultas Seni Rupa dan Desain'),(9,'Fakultas Matematika dan Ilmu Pengetahuan Alam'),(10,'Fakultas Pertanian');
+INSERT INTO `fakultas` VALUES (1,'Fakultas Teknik'),(2,'Fakultas Ilmu Komputer'),(3,'Fakultas Ekonomi dan Bisnis'),(4,'Fakultas Hukum'),(5,'Fakultas Kedokteran'),(6,'Fakultas Psikologi'),(7,'Fakultas Ilmu Sosial dan Politik'),(8,'Fakultas Seni Rupa dan Desain'),(9,'Fakultas Matematika dan Ilmu Pengetahuan Alam'),(10,'Fakultas Pertanian'),(11,'Fakultas Admin');
 /*!40000 ALTER TABLE `fakultas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -56,7 +56,13 @@ CREATE TABLE `schedule` (
   `tanggal` date NOT NULL,
   `lokasi` varchar(255) NOT NULL,
   `status` enum('true','false','pending') DEFAULT NULL,
-  PRIMARY KEY (`id_acara`)
+  `NIM` bigint DEFAULT NULL,
+  `fakultas` int NOT NULL,
+  PRIMARY KEY (`id_acara`),
+  KEY `fakultas` (`fakultas`),
+  KEY `NIM` (`NIM`),
+  CONSTRAINT `schedule_ibfk_1` FOREIGN KEY (`fakultas`) REFERENCES `fakultas` (`id_fakultas`),
+  CONSTRAINT `schedule_ibfk_2` FOREIGN KEY (`NIM`) REFERENCES `users` (`NIM`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -66,6 +72,7 @@ CREATE TABLE `schedule` (
 
 LOCK TABLES `schedule` WRITE;
 /*!40000 ALTER TABLE `schedule` DISABLE KEYS */;
+INSERT INTO `schedule` VALUES (1,'Workshop AI','Belajar dasar AI dan Machine Learning','09:00:00','2024-11-15','Ruang 101','true',12345678901,1),(2,'Seminar Teknologi','Seminar teknologi terbaru di industri','10:30:00','2024-11-16','Aula Utama','pending',12345678902,2),(3,'Pelatihan Manajemen','Pelatihan manajemen untuk mahasiswa baru','13:00:00','2024-11-17','Ruang 201','true',12345678903,3),(4,'Kuliah Umum Akuntansi','Kuliah umum tentang akuntansi modern','15:00:00','2024-11-18','Ruang 305','false',12345678904,1),(5,'Lomba Konstruksi','Lomba konstruksi antar mahasiswa teknik sipil','08:00:00','2024-11-19','Lapangan Kampus','true',12345678905,5);
 /*!40000 ALTER TABLE `schedule` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -76,12 +83,15 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE users (
-  NIM bigint NOT NULL,
-  username varchar(20) NOT NULL,
-  fakultas varchar(255) NOT NULL,
-  password varchar(255) NOT NULL,
-  role enum('user','admin') NOT NULL DEFAULT 'user'
+CREATE TABLE `users` (
+  `NIM` bigint NOT NULL,
+  `username` varchar(20) NOT NULL,
+  `fakultas` int NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `role` enum('user','admin') NOT NULL DEFAULT 'user',
+  PRIMARY KEY (`NIM`),
+  KEY `fakultas` (`fakultas`),
+  CONSTRAINT `users_ibfk_1` FOREIGN KEY (`fakultas`) REFERENCES `fakultas` (`id_fakultas`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -91,7 +101,7 @@ CREATE TABLE users (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (10,'admin','$2y$10$9h3plJhS6R.nBD8d0AiCkuGW9AGaq0kmxT49.ZCC34p3R0oEYUm.y','admin','admin');
+INSERT INTO `users` VALUES (999,'admin',11,'$2y$10$9h3plJhS6R.nBD8d0AiCkuGW9AGaq0kmxT49.ZCC34p3R0oEYUm.y','admin'),(12345678901,'johndoe',1,'password123','user'),(12345678902,'janedoe',2,'password456','user'),(12345678903,'alice',3,'password789','admin'),(12345678904,'bob',1,'password321','user'),(12345678905,'charlie',4,'password654','user');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -104,4 +114,5 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-10 22:55:49
+
+-- Dump completed on 2024-11-12 14:34:53
