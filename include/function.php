@@ -80,4 +80,20 @@ function hitungJumlahFakultas($conn)
   $row = mysqli_fetch_assoc($result);
   return $row['jumlah'];
 }
+
+function jumlahScheduleSetuju($conn)
+{
+  $sql = "SELECT COUNT(status) FROM schedule WHERE status='true'";
+  $result = mysqli_query($conn, $sql);
+  $row = mysqli_fetch_assoc($result);
+  return $row['COUNT(status)'];
+}
+
+function jumlahScheduleTolak($conn)
+{
+  $sql = "SELECT COUNT(status) FROM schedule WHERE status='False'";
+  $result = mysqli_query($conn, $sql);
+  $row = mysqli_fetch_assoc($result);
+  return $row['COUNT(status)'];
+}
 ?>
