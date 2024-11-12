@@ -1,6 +1,14 @@
 <?php
-include 'include/connection.php';
+    include 'include/connection.php';
+    include 'include/function.php';
 
+    if (isset($_GET['id']) && isset($_GET['status'])) {
+    $id_acara = $_GET['id'];
+    $status = $_GET['status'];
+    requestSchedule($id_acara, $status, $conn);
+    header("Location: requests.php");
+    exit();
+}
 $perpage = 5;
 
 $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
@@ -16,6 +24,7 @@ $result = $conn->query($query);
 $totalitemsquery = $conn->query("SELECT COUNT(*) as total FROM schedule");
 $totalitems = $totalitemsquery->fetch_assoc()['total'];
 $totalpages = ceil($totalitems / $perpage);
+?>
 ?>
 
 <!DOCTYPE html>
@@ -110,5 +119,4 @@ $totalpages = ceil($totalitems / $perpage);
         </div>
     </div>
 </body>
-
 </html>
