@@ -57,9 +57,12 @@ CREATE TABLE `schedule` (
   `lokasi` varchar(255) NOT NULL,
   `status` enum('true','false','pending') DEFAULT NULL,
   `NIM` bigint DEFAULT NULL,
+  `fakultas` int NOT NULL,
   PRIMARY KEY (`id_acara`),
+  KEY `fakultas` (`fakultas`),
   KEY `NIM` (`NIM`),
-  CONSTRAINT `schedule_ibfk_1` FOREIGN KEY (`NIM`) REFERENCES `users` (`NIM`) ON DELETE SET NULL ON UPDATE CASCADE
+  CONSTRAINT `schedule_ibfk_1` FOREIGN KEY (`fakultas`) REFERENCES `fakultas` (`id_fakultas`),
+  CONSTRAINT `schedule_ibfk_2` FOREIGN KEY (`NIM`) REFERENCES `users` (`NIM`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -69,7 +72,7 @@ CREATE TABLE `schedule` (
 
 LOCK TABLES `schedule` WRITE;
 /*!40000 ALTER TABLE `schedule` DISABLE KEYS */;
-INSERT INTO `schedule` VALUES (1,'Workshop AI','Belajar dasar AI dan Machine Learning','09:00:00','2024-11-15','Ruang 101','true',12345678901),(2,'Seminar Teknologi','Seminar teknologi terbaru di industri','10:30:00','2024-11-16','Aula Utama','pending',12345678902),(3,'Pelatihan Manajemen','Pelatihan manajemen untuk mahasiswa baru','13:00:00','2024-11-17','Ruang 201','true',12345678903),(4,'Kuliah Umum Akuntansi','Kuliah umum tentang akuntansi modern','15:00:00','2024-11-18','Ruang 305','false',12345678904),(5,'Lomba Konstruksi','Lomba konstruksi antar mahasiswa teknik sipil','08:00:00','2024-11-19','Lapangan Kampus','true',12345678905);
+INSERT INTO `schedule` VALUES (1,'Workshop AI','Belajar dasar AI dan Machine Learning','09:00:00','2024-11-15','Ruang 101','true',12345678901,1),(2,'Seminar Teknologi','Seminar teknologi terbaru di industri','10:30:00','2024-11-16','Aula Utama','pending',12345678902,2),(3,'Pelatihan Manajemen','Pelatihan manajemen untuk mahasiswa baru','13:00:00','2024-11-17','Ruang 201','true',12345678903,3),(4,'Kuliah Umum Akuntansi','Kuliah umum tentang akuntansi modern','15:00:00','2024-11-18','Ruang 305','false',12345678904,1),(5,'Lomba Konstruksi','Lomba konstruksi antar mahasiswa teknik sipil','08:00:00','2024-11-19','Lapangan Kampus','true',12345678905,5);
 /*!40000 ALTER TABLE `schedule` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -111,4 +114,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-12 13:18:52
+-- Dump completed on 2024-11-12 14:34:53
