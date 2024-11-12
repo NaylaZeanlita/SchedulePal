@@ -1,3 +1,17 @@
+<?php
+    include 'include/connection.php';
+    include 'include/function.php';
+
+    if (isset($_GET['id']) && isset($_GET['status'])) {
+    $id_acara = $_GET['id'];
+    $status = $_GET['status'];
+    requestSchedule($id_acara, $status, $conn);
+    header("Location: requests.php");
+    exit();
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,10 +51,10 @@
                     <td>Waktu</td>
                     <td>Tanggal</td>
                     <td>
-                        <a href="">
+                        <a href="requests.php?id=<?php echo $row['id_acara']; ?>&status=true">
                             <button><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#4ADE80"><path d="m424-312 282-282-56-56-226 226-114-114-56 56 170 170ZM200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Z"/></svg></button>
                         </a>
-                        <a href="">
+                        <a href="requests.php?id=<?php echo $row['id_acara']; ?>&status=false">
                             <button><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#EF4444"><path d="m336-280 144-144 144 144 56-56-144-144 144-144-56-56-144 144-144-144-56 56 144 144-144 144 56 56ZM200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Z"/></svg></button>
                         </a>
                     </td>
