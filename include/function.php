@@ -1,7 +1,6 @@
 <?php
 include 'connection.php';
 
-
 function logOut()
 {
   session_start();
