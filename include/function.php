@@ -80,4 +80,19 @@ function hitungJumlahFakultas($conn)
   $row = mysqli_fetch_assoc($result);
   return $row['jumlah'];
 }
+
+function requestSchedule($id_acara = null, $status = null, $conn = null) 
+    if ($id_acara !== null && $status !== null && $conn !== null) {
+        $query = "UPDATE schedule SET status = ? WHERE id_acara = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("si", $status, $id_acara);
+        
+        if ($stmt->execute()) {
+            $stmt->close();
+            return true;
+        }
+        $stmt->close();
+        return false;
+    }
+}
 ?>
