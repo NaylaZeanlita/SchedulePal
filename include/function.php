@@ -80,4 +80,34 @@ function hitungJumlahFakultas($conn)
   $row = mysqli_fetch_assoc($result);
   return $row['jumlah'];
 }
+
+function requestSchedule($id_acara = null, $status = null, $conn = null) 
+    if ($id_acara !== null && $status !== null && $conn !== null) {
+        $query = "UPDATE schedule SET status = ? WHERE id_acara = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("si", $status, $id_acara);
+        
+        if ($stmt->execute()) {
+            $stmt->close();
+            return true;
+        }
+        $stmt->close();
+        return false;
+    }
+}
+function jumlahScheduleSetuju($conn)
+{
+  $sql = "SELECT COUNT(status) FROM schedule WHERE status='true'";
+  $result = mysqli_query($conn, $sql);
+  $row = mysqli_fetch_assoc($result);
+  return $row['COUNT(status)'];
+}
+
+function jumlahScheduleTolak($conn)
+{
+  $sql = "SELECT COUNT(status) FROM schedule WHERE status='False'";
+  $result = mysqli_query($conn, $sql);
+  $row = mysqli_fetch_assoc($result);
+  return $row['COUNT(status)'];
+}
 ?>

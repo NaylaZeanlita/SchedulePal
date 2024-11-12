@@ -26,5 +26,7 @@ CREATE TABLE schedule (
   lokasi varchar(255) NOT NULL,
   status enum('true','false','pending'),
   NIM bigint NULL,
+  fakultas int not null,
+  FOREIGN KEY (fakultas) REFERENCES fakultas(id_fakultas),
   FOREIGN KEY (NIM) REFERENCES users(NIM) ON DELETE SET NULL ON UPDATE CASCADE 
 );

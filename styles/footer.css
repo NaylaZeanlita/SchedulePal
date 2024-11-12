@@ -1,0 +1,29 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+footer {
+  background-color: var(--primary);
+  padding: 4rem 10rem 6rem 10rem;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 1rem;
+  color: var(--secondary);
+  img {
+    width: 150px;
+  }
+
+  div h1 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.05rem;
+  }
+  div p {
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 16px;
+    margin-bottom: 0.5rem;
+  }
+}
